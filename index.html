@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator">
+        <h1>Calculadora Financeira</h1>
+        
+        <div class="calculator-types">
+            <div class="calc-type active" onclick="selectCalculator('compound')">Juros Compostos</div>
+            <div class="calc-type" onclick="selectCalculator('sac')">Sistema SAC</div>
+            <div class="calc-type" onclick="selectCalculator('price')">Sistema PRICE</div>
+        </div>
+        
+        <div id="compound" class="calculator-type active">
+            <div class="input-group"><label>Valor inicial (capital)</label>
+                <div class="input-field"><span>R$</span><input type="text" id="jc-initialValue" placeholder="Ex: 1.000,00" onblur="formatCurrency(this)"></div></div>
+            <div class="input-group"><label>Taxa de juros</label>
+                <div class="input-field"><input type="number" id="jc-interestRate" placeholder="Ex: 11,00" step="0.01"><span>%</span>
+                <select id="jc-interestPeriod"><option value="annual">Anual</option><option value="monthly">Mensal</option></select></div></div>
+            <div class="input-group"><label>Período de aplicação</label>
+                <div class="input-field"><input type="number" id="jc-period" placeholder="Ex: 2">
+                <select id="jc-periodType"><option value="years">Anos</option><option value="months">Meses</option></select></div></div>
+            <button class="calculate-btn" onclick="calculateCompound()">Calcular Juros</button>
+        </div>
+        
+        <div id="sac" class="calculator-type">
+            <div class="input-group"><label>Valor financiado</label>
+                <div class="input-field"><span>R$</span><input type="text" id="sac-value" placeholder="Ex: 100.000,00" onblur="formatCurrency(this)"></div></div>
+            <div class="input-group"><label>Taxa de juros anual</label>
+                <div class="input-field"><input type="number" id="sac-interest" placeholder="Ex: 8,00" step="0.01"><span>%</span></div></div>
+            <div class="input-group"><label>Prazo (em anos)</label>
+                <div class="input-field"><input type="number" id="sac-period" placeholder="Ex: 20"></div></div>
+            <div class="input-group"><label>Mês para cálculo</label>
+                <div class="input-field"><input type="number" id="sac-month" placeholder="Ex: 1" min="1"></div></div>
+            <button class="calculate-btn" onclick="calculateSAC()">Calcular SAC</button>
+        </div>
+        
+        <div id="price" class="calculator-type">
+            <div class="input-group"><label>Valor da parcela</label>
+                <div class="input-field"><span>R$</span><input type="text" id="price-installment" placeholder="Ex: 1.200,00" onblur="formatCurrency(this)"></div></div>
+            <div class="input-group"><label>Capital financiado</label>
+                <div class="input-field"><span>R$</span><input type="text" id="price-value" placeholder="Ex: 100.000,00" onblur="formatCurrency(this)"></div></div>
+            <div class="input-group"><label>Taxa de juros (decimal)</label>
+                <div class="input-field"><input type="number" id="price-interest" placeholder="Ex: 0,08" step="0.0001"></div></div>
+            <div class="input-group"><label>Número total de parcelas</label>
+                <div class="input-field"><input type="number" id="price-period" placeholder="Ex: 240"></div></div>
+            <button class="calculate-btn" onclick="calculatePrice()">Calcular PRICE</button>
+        </div>
+        
+        <div class="result-section" id="resultSection">
+            <div class="result-title" id="resultTitle">Resultado</div>
+            <div id="resultContent"></div>
+            <div class="formula-info" id="formulaInfo"></div>
+            <div id="resultTable"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
